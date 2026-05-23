@@ -1,5 +1,195 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Slow News Day">
+  <link rel="manifest" href="manifest.json">
+  <title>Slow News Day</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0d0d0d;
+      color: #c9d1d9;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 740px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+      line-height: 1.7;
+    }
+    h1 { color: #e6edf3; font-size: 1.6rem; margin-bottom: 0.4rem; }
+    .timestamp { color: #6e7681; font-size: 0.85rem; margin-bottom: 2rem; }
+    .nothing { color: #6e7681; font-style: italic; }
+    .response { white-space: pre-wrap; color: #c9d1d9; }
+    #install-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0 1rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+    #install-banner .bubble {
+      background: #1c2128;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 0.85rem 1rem 0.85rem 1.1rem;
+      max-width: 380px;
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+      pointer-events: auto;
+      position: relative;
+    }
+    #install-banner .bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid #30363d;
+    }
+    #install-banner .bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid #1c2128;
+      z-index: 1;
+    }
+    #install-banner .icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
+    #install-banner .text { flex: 1; font-size: 0.85rem; color: #c9d1d9; }
+    #install-banner .text strong { color: #e6edf3; display: block; margin-bottom: 0.2rem; }
+    #install-banner .install {
+      background: #238636;
+      border: 1px solid #2ea043;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 0.8rem;
+      cursor: pointer;
+      padding: 0.3rem 0.65rem;
+      flex-shrink: 0;
+      white-space: nowrap;
+      align-self: center;
+    }
+    #install-banner .install:hover { background: #2ea043; }
+    #install-banner .dismiss {
+      background: none;
+      border: none;
+      color: #6e7681;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0 0.25rem;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 1px;
+    }
+    #install-banner .dismiss:hover { color: #c9d1d9; }
+  </style>
+</head>
 <body>
-Pages bringup
+  <h1>Slow News Day?</h1>
+  <p class="timestamp" data-timestamp="2026-05-23T20:59:33.876Z">Checked Sat, 23 May 2026 20:59:33 GMT</p>
+  <div class="response">At least 90 people have been killed in a Chinese coal mine explosion.
+
+Evacuation orders have been issued for 40,000 residents after a chemical tank leak in Southern California.
+
+Suspected Ebola cases tripled in a week as the WHO warns of rapid spread in the Democratic Republic of Congo.
+
+Heavy rain has triggered flooding and landslides in parts of China.</div>
+  <script>
+    const el = document.querySelector('.timestamp');
+    const isoTime = el.getAttribute('data-timestamp');
+    if (isoTime) {
+      const date = new Date(isoTime);
+      const formatted = date.toLocaleString('en-US', {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+      el.textContent = 'Checked ' + formatted;
+    }
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') {
+        location.reload();
+      }
+    });
+    (function() {
+      function showBanner(text, extraBtn) {
+        var icon = document.createElement('span');
+        icon.className = 'icon';
+        icon.textContent = '⬆️';
+        var label = document.createElement('span');
+        label.className = 'text';
+        label.innerHTML = text;
+        var dismiss = document.createElement('button');
+        dismiss.className = 'dismiss';
+        dismiss.setAttribute('aria-label', 'Dismiss');
+        dismiss.textContent = '×';
+        var bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        bubble.appendChild(icon);
+        bubble.appendChild(label);
+        if (extraBtn) bubble.appendChild(extraBtn);
+        bubble.appendChild(dismiss);
+        var banner = document.createElement('div');
+        banner.id = 'install-banner';
+        banner.appendChild(bubble);
+        document.body.appendChild(banner);
+        dismiss.addEventListener('click', function() {
+          localStorage.setItem('installDismissed', '1');
+          banner.remove();
+        });
+        return banner;
+      }
+
+      if (localStorage.getItem('installDismissed')) return;
+
+      var isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      var isStandalone = window.navigator.standalone === true ||
+        window.matchMedia('(display-mode: standalone)').matches;
+
+      if (isIos && !isStandalone) {
+        showBanner('<strong>Add to Home Screen</strong>' +
+          'Tap the Share button below, then “Add to Home Screen” for the best experience.');
+      } else if (!isStandalone) {
+        window.addEventListener('beforeinstallprompt', function(e) {
+          e.preventDefault();
+          var installBtn = document.createElement('button');
+          installBtn.className = 'install';
+          installBtn.textContent = 'Install';
+          var banner = showBanner('<strong>Add to Home Screen</strong>' +
+            'Install this app on your device for quick access.', installBtn);
+          installBtn.addEventListener('click', function() {
+            e.prompt();
+            e.userChoice.then(function() {
+              localStorage.setItem('installDismissed', '1');
+              banner.remove();
+            });
+          });
+        });
+      }
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+      }
+    })();
+  </script>
 </body>
 </html>

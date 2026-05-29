@@ -28,6 +28,19 @@
     .faq { margin-top: 2.5rem; }
     .faq dt { color: #e6edf3; font-weight: 600; margin-top: 1.5rem; }
     .faq dd { margin: 0.35rem 0 0 0; }
+    .ab-pref { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
+    .ab-btn {
+      background: #1c2128;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      color: #6e7681;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.3rem 0.9rem;
+      cursor: pointer;
+    }
+    .ab-btn:hover { border-color: #6e7681; color: #c9d1d9; }
+    .ab-btn.active { border-color: #58a6ff; color: #58a6ff; background: rgba(88,166,255,0.08); }
   </style>
 </head>
 <body>
@@ -50,7 +63,12 @@
     <dd>Once a day, at 5 AM Eastern. The point is to check it once and move on with your day. Do not bother refreshing again later.</dd>
 
     <dt>Do you do any A/B testing with the prompts?</dt>
-    <dd>Yes! You can double tap the page to switch between A/B results, and you can set your default preference here:</dd>
+    <dd>Yes! You can double tap the page to switch between A/B results, and you can set your default preference here:
+      <div class="ab-pref">
+        <button class="ab-btn" data-mode="a" onclick="setABPref('a')">A</button>
+        <button class="ab-btn" data-mode="b" onclick="setABPref('b')">B</button>
+      </div>
+    </dd>
 
     <dt>Can I install this as a progressive web app?</dt>
     <dd>Yes! It is designed to be installed as a PWA on iOS and Android. Just open the menu in your browser and look for "Add to Home Screen" or similar.</dd>
@@ -68,5 +86,14 @@
     <p>I miss the days of the Internet where an individual person could build something neat and put it out there, without having to out-compete a mega-cap tech company and scale up. I feel that in some ways, for the moment, the advent of AI in software has brought some of that early energy back. There are things that haven't been done yet that are within reach of ordinary programmers again!</p>
   </dd>
   </dl>
+  <script>
+    function setABPref(mode) {
+      localStorage.setItem('abMode', mode);
+      document.querySelectorAll('.ab-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+      });
+    }
+    setABPref(localStorage.getItem('abMode') || 'a');
+  </script>
 </body>
 </html>

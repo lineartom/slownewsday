@@ -19,7 +19,10 @@
       padding: 0 1.5rem;
       line-height: 1.7;
     }
-    h1 { color: #e6edf3; font-size: 1.6rem; margin-bottom: 0.4rem; }
+    .page-header { display: flex; align-items: baseline; margin-bottom: 0.4rem; }
+    h1 { color: #e6edf3; font-size: 1.6rem; }
+    .about-link { margin-left: auto; color: #6e7681; font-size: 1rem; text-decoration: none; line-height: 1; }
+    .about-link:hover { color: #c9d1d9; }
     .timestamp { color: #6e7681; font-size: 0.85rem; margin-bottom: 2rem; }
     .nothing { color: #6e7681; font-style: italic; }
     .response { white-space: pre-wrap; color: #c9d1d9; }
@@ -100,11 +103,12 @@
   </style>
 </head>
 <body>
-  <h1>Slow News Day?</h1>
-  <p class="timestamp" data-timestamp="2026-05-29T10:03:00.869Z">Checked Fri, 29 May 2026 10:03:00 GMT</p>
-  <div class="response">The WHO chief arrived in the Democratic Republic of Congo promising the Ebola outbreak can be stopped.
-
-\n\n</div>
+  <div class="page-header">
+    <h1>Slow News Day?</h1>
+    <a href="about.html" class="about-link" aria-label="About">ⓘ</a>
+  </div>
+  <p class="timestamp" data-timestamp="2026-05-29T18:11:48.607Z">Checked Fri, 29 May 2026 18:11:48 GMT</p>
+  <div class="response">The US is building an Ebola quarantine center in Kenya for Americans amid an outbreak.</div>
   <script>
     const el = document.querySelector('.timestamp');
     const isoTime = el.getAttribute('data-timestamp');

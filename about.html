@@ -7,12 +7,14 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Slow News Day">
   <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <meta name="theme-color" content="#0e0b07">
   <title>About — Slow News Day</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: #0d0d0d;
-      color: #c9d1d9;
+      background: #0e0b07;
+      color: #cfc9be;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       max-width: 740px;
       margin: 4rem auto;
@@ -20,27 +22,27 @@
       line-height: 1.7;
     }
     .page-header { display: flex; align-items: baseline; margin-bottom: 2rem; }
-    h1 { color: #e6edf3; font-size: 1.6rem; }
-    .back { margin-left: auto; color: #6e7681; font-size: 0.85rem; text-decoration: none; }
-    .back:hover { color: #c9d1d9; }
-    h2 { color: #e6edf3; font-size: 1.1rem; margin: 2rem 0 0.5rem; }
+    h1 { color: #ede8e0; font-size: 1.6rem; }
+    .back { margin-left: auto; color: #7a7068; font-size: 0.85rem; text-decoration: none; }
+    .back:hover { color: #cfc9be; }
+    h2 { color: #ede8e0; font-size: 1.1rem; margin: 2rem 0 0.5rem; }
     p { margin-bottom: 1rem; }
     .faq { margin-top: 2.5rem; }
-    .faq dt { color: #e6edf3; font-weight: 600; margin-top: 1.5rem; }
+    .faq dt { color: #ede8e0; font-weight: 600; margin-top: 1.5rem; }
     .faq dd { margin: 0.35rem 0 0 0; }
     .ab-pref { display: flex; gap: 0.5rem; margin-top: 0.75rem; }
     .ab-btn {
-      background: #1c2128;
-      border: 1px solid #30363d;
+      background: #1e1a14;
+      border: 1px solid #3a342c;
       border-radius: 6px;
-      color: #6e7681;
+      color: #7a7068;
       font-size: 0.9rem;
       font-weight: 600;
       padding: 0.3rem 0.9rem;
       cursor: pointer;
     }
-    .ab-btn:hover { border-color: #6e7681; color: #c9d1d9; }
-    .ab-btn.active { border-color: #58a6ff; color: #58a6ff; background: rgba(88,166,255,0.08); }
+    .ab-btn:hover { border-color: #7a7068; color: #cfc9be; }
+    .ab-btn.active { border-color: #c8a060; color: #c8a060; background: rgba(200,160,96,0.10); }
   </style>
 </head>
 <body>
@@ -50,11 +52,11 @@
   </div>
 
   <h2>What is this?</h2>
-  <p>This app keeps you informed about major events without inducing scrolling and information overload.</p>
+  <p>This app filters out news stories you don't really need to read -- usually all of them!
+    
+  <p>If you feel compelled to check the news every morning just in case something major has happened, but you don't actually want the doom-scrolling and information overload, try this.</p>
   
-  <p>It checks headlines from major news outlets overnight and decides whether you really should be reading any of them when you wake up. On most days, it shows nothing at all, and that is the goal.</p>
-
-  <p>If there is a story that makes the cut, it is presented in short, plain language and boring text. You decide for yourself whether to go search more information about it elsewhere.</p>
+  <p>It checks headlines from major news outlets overnight. On most days, it shows nothing at all, and that is the goal.</p>
 
   <dl class="faq">
     <h2>FAQ</h2>
@@ -62,7 +64,7 @@
     <dt>How often is it updated?</dt>
     <dd>Once a day, at 5 AM Eastern. The point is to check it once and move on with your day. Do not bother refreshing again later.</dd>
 
-    <dt>Do you do any A/B testing with the prompts?</dt>
+    <dt>Do you do any A/B testing with the filter?</dt>
     <dd>Yes! You can double tap the page to switch between A/B results, and you can set your default preference here:
       <div class="ab-pref">
         <button class="ab-btn" data-mode="a" onclick="setABPref('a')">A</button>
@@ -70,14 +72,14 @@
       </div>
     </dd>
 
-    <dt>Can I install this as a progressive web app?</dt>
-    <dd>Yes! It is designed to be installed as a PWA on iOS and Android. Just open the menu in your browser and look for "Add to Home Screen" or similar.</dd>
+    <dt>Can I install this as an App?</dt>
+    <dd>Yes, but it's not in the App Store. It is designed to be installed as a Progressive Web App (PWA) on iOS and Android. Just open the menu in your browser and look for "Add to Home Screen" or similar.</dd>
 
     <dt>Couldn't you link to a site carrying the full story?</dt>
-    <dd>Nope. The point is to reduce information overload and scrolling. The act of opening a separate app is one more implicit filter for whether it's really important enough (to you) to read more. We aren't here to remove filters.</dd>
+    <dd>Nope. The point is to reduce information overload and scrolling. The act of opening a separate app is one more filter for whether it's really important enough (to you) to read more.</dd>
 
     <dt>How does it work?</dt>
-    <dd>The old gaming PC in my basement fetches public RSS feeds and then runs them through a small LLM that fits on the local GPU, an RTX 3060. I make a couple of passes over the data to improve results and make up for the small model. The resulting stories are synthesized and simplified in the model - they are not copies of any one particular headline.</dd>
+    <dd>The old gaming PC in my basement fetches public RSS feeds and then runs them through a small LLM that fits on the local GPU, an RTX 3060. I make a couple of passes over the data to improve results and make up for the small model. The resulting headlines are synthesized in the model - they are not copies of any one particular headline.</dd>
 
     <dt>But I could have done this better!</dt>
     <dd>I made this for myself, because (1) it was a thing I wanted and (2) I wanted to try out vibe coding. It is an explicit design goal to be simple and boring. If you want to make a better one, the best thing to do is probably invest in a larger LLM for the news analysis. Please do not add links, pictures, accounts, like-buttons, etc., I beg of you.

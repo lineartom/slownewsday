@@ -110,40 +110,21 @@
     <h1>Slow News Day?</h1>
     <a href="about.html" class="about-link" aria-label="About">ⓘ</a>
   </div>
-  <p class="timestamp" data-timestamp="2026-06-09T09:17:55.647Z">Checked Tue, 09 Jun 2026 09:17:55 GMT</p>
-  <div id="content-a"><div class="response">Police warn drug gangs are cuckooing hundreds of homes a week.
+  <p class="timestamp" data-timestamp="2026-06-09T16:49:50.672Z">Checked Tue, 09 Jun 2026 16:49:50 GMT</p>
+  <div id="content-a"><div class="response">A magnitude-7.8 earthquake struck off Mindanao in the southern Philippines, collapsing buildings, triggering tsunami alerts, killing at least 35 people and injuring over 200.
 
-A man remains in serious condition after a brutal attack in Belfast.
+US health officials warn that the Ebola outbreak in the Democratic Republic of the Congo could reach a scale comparable to the 2014 West Africa epidemic that killed more than 11,000 people.</div></div>
+  <div id="content-b" style="display:none"><div class="response">A magnitude-7.8 earthquake struck off Mindanao in the southern Philippines, collapsing buildings, triggering tsunami alerts, killing at least 35 people and injuring over 200.
 
-Hundreds of migrants bound for the UK were kidnapped and threatened with kidney removal.
+US health officials warn that the Ebola outbreak in the Democratic Republic of the Congo could reach a scale comparable to the 2014 West Africa epidemic that killed more than 11,000 people.</div></div>
+  <div id="content-c" style="display:none"><div class="response">A magnitude-7.8 earthquake struck the southern Philippines, killing at least 32 people and injuring over 200, collapsing buildings and triggering tsunami alerts across the region.
 
-Lives remain at risk from the unregulated baby sleep industry following a BBC investigation.
+US health officials say CDC modeling indicates the Ebola outbreak in the Democratic Republic of the Congo could reach a scale approaching the 2014 West Africa outbreak that killed over 11,000 people.
 
-Driving test booking rules were tightened after thousands of no shows.
+The chief prosecutor of the International Criminal Court, Karim Khan, has been suspended over claims of sexual misconduct pending a vote by ICC member states.
 
-A powerful earthquake in southern Philippines killed at least 37 people and was followed by hundreds of aftershocks with rising death toll estimates.
-
-US health officials say Ebola in central Africa could match the 2014 record outbreak.
-
-Experts criticize a plan for an American-only Ebola quarantine centre in Kenya.
-
-Chile seized wood laced with historic 100 tons of drugs after snorting sawdust was discovered.
-
-A NATO jet shot down a stray drone in Latvia.
-
-Officials suspect arson in a large-scale power outage in Germany.
-
-Bandits in north-west Nigeria abducted villagers they had invited to peace talks.
-
-Extreme fear among immigrants sweeps South Africa as backlash grows.
-
-The Pentagon labels tech giants Alibaba and car maker BYD as aiding the Chinese military.
-
-A federal judge strikes down Trump's $100,000 fee on new H-1B visas.
-
-The Trump DOJ plans to denaturalize 17 US citizens in a rare move.</div></div>
-  <div id="content-b" style="display:none"><p class="nothing">Nothing to report.</p></div>
-  <script>if((localStorage.getItem('abMode')||'a')==='b'){document.getElementById('content-a').style.display='none';document.getElementById('content-b').style.display='';}</script>
+The next-generation Franco-German combat aircraft program has collapsed due to industry disagreements, marking a significant setback to European defense cooperation.</div></div>
+  <script>(function(){var m=localStorage.getItem('abMode')||'a';['a','b','c'].forEach(function(k){var el=document.getElementById('content-'+k);if(el)el.style.display=k===m?'':'none';});})();</script>
   <script>
     const el = document.querySelector('.timestamp');
     const isoTime = el.getAttribute('data-timestamp');
@@ -165,11 +146,14 @@ The Trump DOJ plans to denaturalize 17 US citizens in a rare move.</div></div>
       }
     });
     (function() {
+      var _order = ['a', 'b', 'c'];
       var _mode = localStorage.getItem('abMode') || 'a';
       function _setAB(mode) {
         _mode = mode;
-        document.getElementById('content-a').style.display = mode === 'b' ? 'none' : '';
-        document.getElementById('content-b').style.display = mode === 'b' ? '' : 'none';
+        _order.forEach(function(k) {
+          var el = document.getElementById('content-' + k);
+          if (el) el.style.display = k === mode ? '' : 'none';
+        });
       }
       function _showOverlay(label) {
         var el = document.createElement('div');
@@ -188,7 +172,7 @@ The Trump DOJ plans to denaturalize 17 US citizens in a rare move.</div></div>
       }
       document.addEventListener('dblclick', function(e) {
         e.preventDefault();
-        var next = _mode === 'a' ? 'b' : 'a';
+        var next = _order[(_order.indexOf(_mode) + 1) % _order.length];
         _setAB(next);
         _showOverlay(next.toUpperCase());
       });

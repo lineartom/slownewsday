@@ -52,26 +52,24 @@
   </div>
 
   <h2>What is this?</h2>
-  <p>This app filters out news stories you don't really need to read -- usually all of them!
-    
-  <p>If you feel compelled to check the news every morning just in case something major has happened, but you don't actually want the doom-scrolling and information overload, try this.</p>
-  
-  <p>It checks headlines from major news outlets overnight. On most days, it shows nothing at all, and that is the goal.</p>
+  <p>This app filters out news stories you don't really need to read -- oftentimes, all of them! -- while still keeping you informed if something Earth-shattering has happened.</p>
+
+  <p>When it does show a story, it does so in plain, boring language with nothing to click. Take a glance and move on with your day!</p>
 
   <dl class="faq">
     <h2>FAQ</h2>
 
-    <dt>How often is it updated?</dt>
-    <dd>Once a day, at 5 AM Eastern. The point is to check it once and move on with your day. Do not bother refreshing again later.</dd>
-
-    <dt>Do you do any A/B testing with the filter?</dt>
-    <dd>Yes! You can double tap the page to cycle through the A/B/C results, and you can set your default preference here:
+    <dt>What if I'd rather see more news, or less news?</dt>
+    <dd>You can choose your preference from three different filter algorithms! Double-tap the page to cycle through them, or use the buttons below to save your preference. <em>Quiet</em> will quite often show nothing at all. <em>Top-Four</em> will <b>always</b> show exactly four stories, still in plain, boring language.</dd>
       <div class="ab-pref">
-        <button class="ab-btn" data-mode="a" onclick="setABPref('a')">A</button>
-        <button class="ab-btn" data-mode="b" onclick="setABPref('b')">B</button>
-        <button class="ab-btn" data-mode="c" onclick="setABPref('c')">C</button>
+        <button class="ab-btn" data-mode="a" onclick="setABPref('a')">Balanced</button>
+        <button class="ab-btn" data-mode="b" onclick="setABPref('b')">Quiet</button>
+        <button class="ab-btn" data-mode="c" onclick="setABPref('c')">Top-Four</button>
       </div>
     </dd>
+
+    <dt>How often is it updated?</dt>
+    <dd>Once a day, at 5 AM Eastern. The point is to check it once and move on with your day. Do not bother refreshing again later.</dd>
 
     <dt>Can I install this as an App?</dt>
     <dd>Yes, but it's not in the App Store. It is designed to be installed as a Progressive Web App (PWA) on iOS and Android. Just open the menu in your browser and look for "Add to Home Screen" or similar.</dd>

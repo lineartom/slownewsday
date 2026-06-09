@@ -110,10 +110,21 @@
     <h1>Slow News Day?</h1>
     <a href="about.html" class="about-link" aria-label="About">ⓘ</a>
   </div>
-  <p class="timestamp" data-timestamp="2026-06-01T17:29:24.729Z">Checked Mon, 01 Jun 2026 17:29:24 GMT</p>
-  <div id="content-a"><div class="response">Confirmed Ebola cases in Congo have reached 282 as the WHO calls for community cooperation to contain the outbreak.</div></div>
-  <div id="content-b" style="display:none"><p class="nothing">Nothing to report.</p></div>
-  <script>if((localStorage.getItem('abMode')||'a')==='b'){document.getElementById('content-a').style.display='none';document.getElementById('content-b').style.display='';}</script>
+  <p class="timestamp" data-timestamp="2026-06-09T17:38:05.247Z">Checked Tue, 09 Jun 2026 17:38:05 GMT</p>
+  <div id="content-a"><div class="response">A magnitude-7.8 earthquake struck off Mindanao in the southern Philippines, collapsing buildings, triggering tsunami alerts, and killing at least 35 people with over 200 injured.
+
+US CDC modeling indicates the Ebola outbreak in the Democratic Republic of the Congo could reach tens of thousands of cases, potentially approaching the scale of the 2014 West Africa outbreak that killed over 11,000 people.</div></div>
+  <div id="content-b" style="display:none"><div class="response">A magnitude-7.8 earthquake struck off Mindanao in the southern Philippines, collapsing buildings, triggering tsunami alerts, and killing at least 35 people with over 200 injured.
+
+US CDC modeling indicates the Ebola outbreak in the Democratic Republic of the Congo could reach tens of thousands of cases, potentially approaching the scale of the 2014 West Africa outbreak that killed over 11,000 people.</div></div>
+  <div id="content-c" style="display:none"><div class="response">A magnitude-7.8 earthquake struck the southern Philippines, killing at least 32 people and injuring over 200, collapsing buildings and prompting tsunami alerts across the region.
+
+CDC modeling indicates the Ebola outbreak in the Democratic Republic of the Congo could reach tens of thousands of cases, potentially matching the scale of the 2014 West Africa outbreak.
+
+The Franco-German next-generation fighter jet program has been scrapped following industry disagreements, dealing a significant setback to European defense cooperation.
+
+The chief prosecutor of the International Criminal Court, Karim Khan, has been suspended amid allegations of sexual misconduct, pending a vote by member states.</div></div>
+  <script>(function(){var m=localStorage.getItem('abMode')||'a';['a','b','c'].forEach(function(k){var el=document.getElementById('content-'+k);if(el)el.style.display=k===m?'':'none';});})();</script>
   <script>
     const el = document.querySelector('.timestamp');
     const isoTime = el.getAttribute('data-timestamp');
@@ -135,17 +146,22 @@
       }
     });
     (function() {
+      var _order = ['a', 'b', 'c'];
+      var _names = { a: 'Balanced', b: 'Quiet', c: 'Top-Four' };
       var _mode = localStorage.getItem('abMode') || 'a';
       function _setAB(mode) {
         _mode = mode;
-        document.getElementById('content-a').style.display = mode === 'b' ? 'none' : '';
-        document.getElementById('content-b').style.display = mode === 'b' ? '' : 'none';
+        _order.forEach(function(k) {
+          var el = document.getElementById('content-' + k);
+          if (el) el.style.display = k === mode ? '' : 'none';
+        });
       }
       function _showOverlay(label) {
         var el = document.createElement('div');
         el.textContent = label;
         el.style.cssText = 'position:fixed;inset:0;display:flex;align-items:center;' +
-          'justify-content:center;font-size:8rem;font-weight:700;color:#ede8e0;' +
+          'justify-content:center;font-size:min(7rem,16vw);font-weight:700;color:#ede8e0;' +
+          'white-space:nowrap;text-align:center;' +
           'background:rgba(0,0,0,0.45);z-index:9999;pointer-events:none;opacity:1;' +
           'transition:opacity 0.7s ease;';
         document.body.appendChild(el);
@@ -158,9 +174,9 @@
       }
       document.addEventListener('dblclick', function(e) {
         e.preventDefault();
-        var next = _mode === 'a' ? 'b' : 'a';
+        var next = _order[(_order.indexOf(_mode) + 1) % _order.length];
         _setAB(next);
-        _showOverlay(next.toUpperCase());
+        _showOverlay(_names[next] || next.toUpperCase());
       });
     })();
     (function() {

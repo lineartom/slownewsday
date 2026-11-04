@@ -60,11 +60,12 @@
     <h2>FAQ</h2>
 
     <dt>What if I'd rather see more news, or less news?</dt>
-    <dd>You can choose your preference from three different filter algorithms! Double-tap the page to cycle through them, or use the buttons below to save your preference. <em>Quiet</em> will quite often show nothing at all. <em>Top-Four</em> will <b>always</b> show exactly four stories, still in plain, boring language.</dd>
+    <dd>You can choose your preference from four different filter algorithms! Double-tap the page to cycle through them, or use the buttons below to save your preference. <em>Quiet</em> will quite often show nothing at all. <em>Top-Four</em> will <b>always</b> show exactly four stories, still in plain, boring language. <em>Top-Four CLSTR</em> does the same, but picks from the far wider range of stories collected by CLSTR.</dd>
       <div class="ab-pref">
         <button class="ab-btn" data-mode="a" onclick="setABPref('a')">Balanced</button>
         <button class="ab-btn" data-mode="b" onclick="setABPref('b')">Quiet</button>
         <button class="ab-btn" data-mode="c" onclick="setABPref('c')">Top-Four</button>
+        <button class="ab-btn" data-mode="d" onclick="setABPref('d')">Top-Four CLSTR</button>
       </div>
     </dd>
 
@@ -78,7 +79,7 @@
     <dd>Nope. The point is to reduce information overload and scrolling. The act of opening a separate app is one more filter for whether it's really important enough (to you) to read more.</dd>
 
     <dt>How does it work?</dt>
-    <dd>The old gaming PC in my basement fetches public RSS feeds and then runs them through a small LLM that fits on the local GPU, an RTX 3060. I make a couple of passes over the data to improve results and make up for the small model. The resulting headlines are synthesized in the model - they are not copies of any one particular headline.</dd>
+    <dd>The old gaming PC in my basement fetches public RSS feeds and then runs them through a small LLM that fits on the local GPU, an RTX 3060. I make a couple of passes over the data to improve results and make up for the small model. The resulting headlines are synthesized in the model - they are not copies of any one particular headline. <em>Top-Four CLSTR</em> is the exception to the setup: it gets its stories from the CLSTR news API instead of the RSS feeds, and has Claude choose the four and write them up.</dd>
 
     <dt>But I could have done this better!</dt>
     <dd>I made this for myself, because (1) it was a thing I wanted and (2) I wanted to try out vibe coding. It is an explicit design goal to be simple and boring. If you want to make a better one, the best thing to do is probably invest in a larger LLM for the news analysis. Please do not add links, pictures, accounts, like-buttons, etc., I beg of you.

@@ -27,6 +27,7 @@
     .about-link { margin-left: auto; color: #7a7068; font-size: 1rem; text-decoration: none; line-height: 1; }
     .about-link:hover { color: #cfc9be; }
     .timestamp { color: #7a7068; font-size: 0.85rem; margin-bottom: 2rem; }
+    .timestamp.stale { color: #e5484d; }
     .nothing { color: #7a7068; font-style: italic; }
     .response { white-space: pre-wrap; color: #cfc9be; }
     #install-banner {
@@ -110,17 +111,24 @@
     <h1>Slow News Day?</h1>
     <a href="about.html" class="about-link" aria-label="About">ⓘ</a>
   </div>
-  <p class="timestamp" data-timestamp="2026-10-29T04:53:24.293Z">Checked Thu, 29 Oct 2026 04:53:24 GMT</p>
+  <p class="timestamp" data-timestamp="2026-11-04T23:58:34.748Z">Checked Wed, 04 Nov 2026 23:58:34 GMT</p>
   <div id="content-a"><p class="nothing">There's nothing in the news you need to know today. Have a great day!</p></div>
   <div id="content-b" style="display:none"><p class="nothing">There's nothing in the news you need to know today. Have a great day!</p></div>
-  <div id="content-c" style="display:none"><div class="response">The UK chancellor delivered his first Budget, including a £100 energy bill payment and a bank tax, as official forecasters warned higher energy prices will weigh on growth and living standards.
+  <div id="content-c" style="display:none"><div class="response">Democrats won control of both chambers of the US Congress in the midterm elections, limiting President Trump's domestic agenda and setting up investigations into his administration.
 
-Two high-speed trains collided south of Madrid, killing at least 68 people and prompting Spain to declare three days of national mourning.
+A Russian strike on a Ukrainian village killed at least 40 people, with dozens more feared trapped under rubble.
 
-Partial Israeli election results show Netanyahu's bloc leading but likely short of a parliamentary majority, pointing to difficult coalition negotiations.
+A British healthcare worker infected with Ebola in the Democratic Republic of Congo is being evacuated to the UK for specialist treatment.
 
-Hackers published the personal details of more than 41,000 US Department of Homeland Security employees, including immigration enforcement agents.</div></div>
-  <script>(function(){var m=localStorage.getItem('abMode')||'a';['a','b','c'].forEach(function(k){var el=document.getElementById('content-'+k);if(el)el.style.display=k===m?'':'none';});})();</script>
+South Africans voted in local elections amid widespread discontent over failing public services, with the governing ANC projected to lose significant support.</div></div>
+  <div id="content-d" style="display:none"><div class="response">Democrats won control of both chambers of the US Congress in the 2026 midterm elections.
+
+Diplomatic efforts led by the United States to broker a peace deal between Russia and Ukraine have intensified, including a meeting between Trump and Putin.
+
+Iran has deployed naval forces in the Strait of Hormuz and threatened to keep it closed until the United States meets its demands, amid escalating military confrontation.
+
+Saudi Arabia, Pakistan, and Turkey have moved their joint defense pact into parliamentary approval and its operational phase.</div></div>
+  <script>(function(){var m=localStorage.getItem('abMode')||'a';['a','b','c','d'].forEach(function(k){var el=document.getElementById('content-'+k);if(el)el.style.display=k===m?'':'none';});})();</script>
   <script>
     const el = document.querySelector('.timestamp');
     const isoTime = el.getAttribute('data-timestamp');
@@ -135,6 +143,13 @@ Hackers published the personal details of more than 41,000 US Department of Home
         minute: '2-digit'
       });
       el.textContent = 'Checked ' + formatted;
+      const STALE_AFTER_MS = 36 * 60 * 60 * 1000;
+      const markIfStale = function() {
+        el.classList.toggle('stale', Date.now() - date.getTime() > STALE_AFTER_MS);
+      };
+      markIfStale();
+      // The page can sit open and visible past the threshold without reloading.
+      setInterval(markIfStale, 60 * 1000);
     }
     document.addEventListener('visibilitychange', function() {
       if (document.visibilityState === 'visible') {
@@ -142,8 +157,8 @@ Hackers published the personal details of more than 41,000 US Department of Home
       }
     });
     (function() {
-      var _order = ['a', 'b', 'c'];
-      var _names = { a: 'Balanced', b: 'Quiet', c: 'Top-Four' };
+      var _order = ['a', 'b', 'c', 'd'];
+      var _names = { a: 'Balanced', b: 'Quiet', c: 'Top-Four', d: 'Top-Four CLSTR' };
       var _mode = localStorage.getItem('abMode') || 'a';
       function _setAB(mode) {
         _mode = mode;
@@ -157,7 +172,7 @@ Hackers published the personal details of more than 41,000 US Department of Home
         el.textContent = label;
         el.style.cssText = 'position:fixed;inset:0;display:flex;align-items:center;' +
           'justify-content:center;font-size:min(7rem,16vw);font-weight:700;color:#ede8e0;' +
-          'white-space:nowrap;text-align:center;' +
+          'text-align:center;' +
           'background:rgba(0,0,0,0.45);z-index:9999;pointer-events:none;opacity:1;' +
           'transition:opacity 1.4s ease;';
         document.body.appendChild(el);
